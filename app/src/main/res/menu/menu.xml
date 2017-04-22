@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/new_game"
+        android:title="New Game" />
+    <item
+        android:id="@+id/switch_sides"
+        android:title="Switch Side" />
+    <item
+        android:id="@+id/auto_game"
+        android:title="Enable Computer AI" />
+</menu>
