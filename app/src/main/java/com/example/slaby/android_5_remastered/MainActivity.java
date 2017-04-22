@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String switch_sidesText;
     String enableText;
     String disableText;
+    String drawText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         switch_sidesText = getResources().getString(R.string.switch_sides);
         enableText = getResources().getString(R.string.enable);
         disableText = getResources().getString(R.string.disable);
+        drawText = getResources().getString(R.string.draw);
     }
 
     public void initializeSounds() {
@@ -194,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDraw() {
-        winnerText.setText("DRAW");
+        winnerText.setText(drawText);
     }
 
     public Point getPointByXY(int x, int y) {

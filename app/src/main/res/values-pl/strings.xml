@@ -7,4 +7,5 @@
     <string name="switch_sides">Zmien Strone</string>
     <string name="enable">Włącz</string>
     <string name="disable">Wyłącz</string>
+    <string name="draw">Remis</string>
 </resources>
