@@ -170,6 +170,12 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    public void shouldEnableSwitchSide(boolean enable) {
+        if (switchSideMenuItem != null) {
+            switchSideMenuItem.setEnabled(enable);
+        }
+    }
+
     public void hanldeCellClick(int row, float x) {
         final float col1Min = 120;
         final float col1Max = 370;
@@ -263,13 +269,16 @@ public class MainActivity extends AppCompatActivity {
     public void startNewGame() {
         System.out.println("NEW GAME");
         game = new Game();
+
+        shouldEnableSwitchSide(true);
         clearWinner();
         initializeArrayOfPoints();
         clearAllPoints();
     }
 
     public void switchSides() {
-        System.out.println("SWITCH SIDES");
+        game.tura = game.tura == Type.CIRCLE ? Type.CROSS : Type.CIRCLE;
+        setTura(game.tura);
     }
 
     public void enableComputerAIMenuItem() {

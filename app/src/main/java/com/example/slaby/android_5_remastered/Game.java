@@ -19,9 +19,11 @@ public class Game {
         if (state == GameState.CROSS_WIN || state == GameState.DRAW || state == GameState.CIRCLE_WIN) {
             return;
         }
+
         Point tmp = mainActivity.getPointByCellId(cellId);
         if (tmp.type != Type.BLANK) {
             mainActivity.signalTouchingAlreadyOccupiedCell();
+            return;
         }
         tmp.setPointState(tura);
         proceedWithGame();
@@ -39,6 +41,7 @@ public class Game {
         } else if (state == GameState.PROGRESS) {
             changeTura();
         }
+        mainActivity.shouldEnableSwitchSide(state == GameState.NEW_GAME);
 
     }
 
