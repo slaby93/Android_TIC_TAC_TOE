@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
         return new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if (game.isGameFinished()) {
+                    outOfAreaSound.start();
+                }
                 handleTouchEvent(event.getX(), event.getY());
                 return false;
             }

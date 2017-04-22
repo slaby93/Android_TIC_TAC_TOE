@@ -68,6 +68,7 @@ public class Game {
                 } else {
                     areCrossWin = true;
                 }
+                mainActivity.vibrate();
             }
         }
 
@@ -75,16 +76,21 @@ public class Game {
             this.state = GameState.NEW_GAME;
         } else if (areCircleWin) {
             this.state = GameState.CIRCLE_WIN;
+        } else if (areCrossWin) {
+            this.state = GameState.CROSS_WIN;
         } else {
             this.state = GameState.PROGRESS;
         }
 
-        if (areCrossWin) {
-            this.state = GameState.CROSS_WIN;
-        }
+
         if (numberOfNotBlankCells == 9) {
             this.state = GameState.DRAW;
+            mainActivity.vibrate();
         }
+    }
+
+    public boolean isGameFinished() {
+        return state == GameState.CROSS_WIN || state == GameState.CIRCLE_WIN || state == GameState.DRAW;
     }
 
     private boolean checkIfPointWon(Point startingPoint) {
