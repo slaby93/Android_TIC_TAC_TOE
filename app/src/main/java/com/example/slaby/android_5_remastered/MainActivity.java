@@ -1,6 +1,9 @@
 package com.example.slaby.android_5_remastered;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout wrapper;
     ImageView nowTura;
     TextView winnerText;
+    MediaPlayer outOfAreaSound;
+    MediaPlayer onOccupiedSound;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +45,21 @@ public class MainActivity extends AppCompatActivity {
         setupTopbar();
         Game.mainActivity = this;
         Point.mainActivity = this;
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         winnerText = (TextView) findViewById(R.id.winnerText);
         cross = ContextCompat.getDrawable(this, R.drawable.cross);
         circle = ContextCompat.getDrawable(this, R.drawable.circle);
         nowTura = (ImageView) findViewById(R.id.nowTura);
         wrapper = (RelativeLayout) findViewById(R.id.wrapper);
+        initializeSounds();
         wrapper.setOnTouchListener(onTouch());
         initializeArrayOfPoints();
         startNewGame();
+    }
+
+    public void initializeSounds() {
+        outOfAreaSound = MediaPlayer.create(this, R.raw.a);
+        onOccupiedSound = MediaPlayer.create(this, R.raw.b);
     }
 
     public void initializeArrayOfPoints() {
@@ -144,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
         } else if (y >= row3YMin && y <= row3YMax) {
             hanldeCellClick(2, x);
         } else {
+
+            outOfAreaSound.start();
             System.out.println("OUT OF BOX ROW");
         }
     }
@@ -193,11 +208,13 @@ public class MainActivity extends AppCompatActivity {
         } else if (x >= col3Min && x <= col3Max) {
             clickedCell(2, row);
         } else {
+            outOfAreaSound.start();
             System.out.println("OUT OF BOX COL");
         }
     }
 
     public void signalTouchingAlreadyOccupiedCell() {
+        onOccupiedSound.start();
         System.out.println("ALREADY OCCUPIED CELL");
     }
 
@@ -229,6 +246,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickedCell(int x, int y) {
         game.touchedCell(getCellIdByXY(x, y));
+    }
+
+    public void vibrate() {
+        vibrator.vibrate(250);
     }
 
     public void setCellDrawable(int cellId, Type type) {

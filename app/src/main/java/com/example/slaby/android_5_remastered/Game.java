@@ -39,6 +39,7 @@ public class Game {
         } else if (state == GameState.DRAW) {
             mainActivity.setDraw();
         } else if (state == GameState.PROGRESS) {
+            mainActivity.vibrate();
             changeTura();
         }
         mainActivity.shouldEnableSwitchSide(state == GameState.NEW_GAME);
