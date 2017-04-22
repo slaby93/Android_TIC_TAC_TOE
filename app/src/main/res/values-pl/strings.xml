@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Daniel Slaby Tic Tac Toe</string>
+    <string name="now_plays">Teraz gra:</string>
+    <string name="winner_is">Wygrywa:</string>
+    <string name="new_game">Nowa Gra</string>
+    <string name="switch_sides">Zmien Strone</string>
+    <string name="enable">Włącz</string>
+    <string name="disable">Wyłącz</string>
+</resources>

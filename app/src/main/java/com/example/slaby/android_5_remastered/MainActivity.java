@@ -1,6 +1,7 @@
 package com.example.slaby.android_5_remastered;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
@@ -37,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer outOfAreaSound;
     MediaPlayer onOccupiedSound;
     Vibrator vibrator;
+    String winner_isText;
+    String now_playsText;
+    String new_gameText;
+    String switch_sidesText;
+    String enableText;
+    String disableText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +58,23 @@ public class MainActivity extends AppCompatActivity {
         circle = ContextCompat.getDrawable(this, R.drawable.circle);
         nowTura = (ImageView) findViewById(R.id.nowTura);
         wrapper = (RelativeLayout) findViewById(R.id.wrapper);
+        initializeStringConsts();
+        // FORCE ORIENTATION
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initializeSounds();
         wrapper.setOnTouchListener(onTouch());
+
         initializeArrayOfPoints();
         startNewGame();
+    }
+
+    public void initializeStringConsts() {
+        winner_isText = getResources().getString(R.string.winner_is);
+        now_playsText = getResources().getString(R.string.now_plays);
+        new_gameText = getResources().getString(R.string.new_game);
+        switch_sidesText = getResources().getString(R.string.switch_sides);
+        enableText = getResources().getString(R.string.enable);
+        disableText = getResources().getString(R.string.disable);
     }
 
     public void initializeSounds() {
@@ -160,9 +180,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (y >= row3YMin && y <= row3YMax) {
             hanldeCellClick(2, x);
         } else {
-
             outOfAreaSound.start();
-            System.out.println("OUT OF BOX ROW");
         }
     }
 
@@ -171,7 +189,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setWinner(Type winner) {
-        winnerText.setText("Winner: " + winner);
+
+        winnerText.setText(winner_isText + " " + winner);
     }
 
     public void setDraw() {
@@ -212,7 +231,6 @@ public class MainActivity extends AppCompatActivity {
             clickedCell(2, row);
         } else {
             outOfAreaSound.start();
-            System.out.println("OUT OF BOX COL");
         }
     }
 
@@ -270,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         enableComputerAIMenuItem = menu.findItem(R.id.auto_game);
         switchSideMenuItem = menu.findItem(R.id.switch_sides);
+        syncAIButton();
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -307,10 +326,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void enableComputerAIMenuItem() {
         this.isAutoPlayEnabled = !this.isAutoPlayEnabled;
+        syncAIButton();
+    }
+
+    public void syncAIButton() {
         if (this.isAutoPlayEnabled) {
-            enableComputerAIMenuItem.setTitle("Disable Computer AI");
+            enableComputerAIMenuItem.setTitle(disableText + " AI");
         } else {
-            enableComputerAIMenuItem.setTitle("Enable Computer AI");
+            enableComputerAIMenuItem.setTitle(enableText + " AI");
         }
     }
 

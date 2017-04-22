@@ -4,11 +4,11 @@
 
     <item
         android:id="@+id/new_game"
-        android:title="New Game" />
+        android:title="@string/new_game" />
     <item
         android:id="@+id/switch_sides"
-        android:title="Switch Side" />
+        android:title="@string/switch_sides" />
     <item
         android:id="@+id/auto_game"
-        android:title="Enable Computer AI" />
+        android:title="@string/disable" />
 </menu>

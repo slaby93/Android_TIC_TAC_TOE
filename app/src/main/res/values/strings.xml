@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Android_5_remastered</string>
+    <string name="app_name">Daniel Slaby Tic Tac Toe</string>
+    <string name="now_plays">Now plays:</string>
+    <string name="winner_is">Winner is:</string>
+    <string name="new_game">New Game</string>
+    <string name="switch_sides">Switch Side</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
 </resources>
