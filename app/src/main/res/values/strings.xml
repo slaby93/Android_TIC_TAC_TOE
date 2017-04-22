@@ -7,4 +7,6 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="draw">Draw</string>
+    <string name="circle">Circle</string>
+    <string name="cross">Cross</string>
 </resources>

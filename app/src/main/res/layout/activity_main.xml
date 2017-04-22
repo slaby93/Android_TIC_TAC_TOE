@@ -39,6 +39,7 @@
                     android:layout_weight="1"
                     android:autoText="false"
                     android:freezesText="false"
+                    android:paddingLeft="20dp"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="40dp" />
             </LinearLayout>

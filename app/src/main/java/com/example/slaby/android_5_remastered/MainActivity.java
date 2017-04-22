@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     String enableText;
     String disableText;
     String drawText;
+    String circleText;
+    String crossText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         enableText = getResources().getString(R.string.enable);
         disableText = getResources().getString(R.string.disable);
         drawText = getResources().getString(R.string.draw);
+        circleText = getResources().getString(R.string.circle);
+        crossText = getResources().getString(R.string.cross);
     }
 
     public void initializeSounds() {
@@ -191,8 +195,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setWinner(Type winner) {
+        if (winner == Type.CIRCLE) {
+            winnerText.setText(winner_isText + " " + circleText);
+        } else {
+            winnerText.setText(winner_isText + " " + crossText);
+        }
 
-        winnerText.setText(winner_isText + " " + winner);
     }
 
     public void setDraw() {

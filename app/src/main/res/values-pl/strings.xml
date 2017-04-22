@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Daniel Slaby Tic Tac Toe</string>
+    <string name="app_name">Daniel Slaby Kółko i Krzyżyk</string>
     <string name="now_plays">Teraz gra:</string>
     <string name="winner_is">Wygrywa:</string>
     <string name="new_game">Nowa Gra</string>
@@ -8,4 +8,6 @@
     <string name="enable">Włącz</string>
     <string name="disable">Wyłącz</string>
     <string name="draw">Remis</string>
+    <string name="circle">Kółko</string>
+    <string name="cross">Krzyżyk</string>
 </resources>
