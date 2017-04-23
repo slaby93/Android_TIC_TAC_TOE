@@ -8,10 +8,13 @@ public class Game {
     static MainActivity mainActivity;
     Type tura;
     GameState state;
+    Type AIType;
+    Boolean didAiMoved;
 
     Game() {
         tura = Type.CIRCLE;
         state = GameState.NEW_GAME;
+        didAiMoved = false;
         mainActivity.setTura(tura);
     }
 
@@ -40,10 +43,28 @@ public class Game {
             mainActivity.setDraw();
         } else if (state == GameState.PROGRESS) {
             mainActivity.vibrate();
+            if (mainActivity.isAutoPlayEnabled && !didAiMoved) {
+                tryToAutoplay();
+            } else {
+                didAiMoved = false;
+            }
             changeTura();
         }
         mainActivity.shouldEnableSwitchSide(state == GameState.NEW_GAME);
 
+    }
+
+    public void tryToAutoplay() {
+        AIType = this.tura == Type.CIRCLE ? Type.CROSS : Type.CIRCLE;
+        didAiMoved = true;
+        for (int i = 0; i < 9; i++) {
+            Point tmp = mainActivity.arrayOfPoints.get(i);
+            if (tmp.type == Type.BLANK) {
+                tmp.setPointState(AIType);
+                break;
+            }
+        }
+        proceedWithGame();
     }
 
     private void changeTura() {
