@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         game.tura = tura;
         this.setTura(tura);
         game.checkGameState();
+        System.out.println(game.state);
+        shouldEnableSwitchSide(game.state == GameState.NEW_GAME);
         if (game.state == GameState.CIRCLE_WIN) {
             setWinner(Type.CIRCLE);
         } else if (game.state == GameState.CROSS_WIN) {
@@ -373,6 +375,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         enableComputerAIMenuItem = menu.findItem(R.id.auto_game);
         switchSideMenuItem = menu.findItem(R.id.switch_sides);
+        shouldEnableSwitchSide(game.state == GameState.NEW_GAME);
         syncAIButton();
         return super.onPrepareOptionsMenu(menu);
     }

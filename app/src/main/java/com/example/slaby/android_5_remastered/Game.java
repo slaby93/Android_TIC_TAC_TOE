@@ -50,7 +50,6 @@ public class Game {
             }
             changeTura();
         }
-        mainActivity.shouldEnableSwitchSide(state == GameState.NEW_GAME);
     }
 
     public void tryToAutoplay() {
