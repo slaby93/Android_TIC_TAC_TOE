@@ -1,6 +1,7 @@
 package com.example.slaby.android_5_remastered;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -49,9 +50,12 @@ public class MainActivity extends AppCompatActivity {
     String AIPlayerToastMessageText;
     String enabledText;
     String disabledText;
+    SharedPreferences prefs;
+    static String sharedPreferencesKey = "tic_tac_toe";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("savedInstanceState " + savedInstanceState);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupTopbar();
@@ -63,14 +67,69 @@ public class MainActivity extends AppCompatActivity {
         circle = ContextCompat.getDrawable(this, R.drawable.circle);
         nowTura = (ImageView) findViewById(R.id.nowTura);
         wrapper = (RelativeLayout) findViewById(R.id.wrapper);
+        prefs = getSharedPreferences(sharedPreferencesKey, Context.MODE_PRIVATE);
         initializeStringConsts();
         // FORCE ORIENTATION
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initializeSounds();
         wrapper.setOnTouchListener(onTouch());
+        initializeGame();
+    }
 
+    public void initializeGame() {
         initializeArrayOfPoints();
+        if (prefs.contains("Tura")) {
+            initializeGameFromSavedData();
+        } else {
+            startNewGame();
+        }
+    }
+
+    public void initializeGameFromSavedData() {
+        clearWinner();
+        clearAllPoints();
         startNewGame();
+
+        Type tura = prefs.getString("Tura", null).equals(Type.CIRCLE.toString()) ? Type.CIRCLE : Type.CROSS;
+        boolean isAIEnabled = prefs.getBoolean("IsAIEnabled", false);
+        for (int i = 0; i < 9; i++) {
+            Point tmp = arrayOfPoints.get(i);
+            String savedPointState = prefs.getString("point" + tmp.id, "BLANK");
+            Type pointType = Type.BLANK;
+            if (savedPointState.equals(Type.CIRCLE.toString())) {
+                pointType = Type.CIRCLE;
+            } else if (savedPointState.equals(Type.CROSS.toString())) {
+                pointType = Type.CROSS;
+            }
+            tmp.setPointState(pointType);
+        }
+        System.out.println("TURA: " + tura + " isAIEnabled: " + isAIEnabled);
+
+        this.isAutoPlayEnabled = isAIEnabled;
+        game.tura = tura;
+        this.setTura(tura);
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        System.out.println("SAVING CONFIG");
+        try {
+            prefs.edit()
+                    .putString("Tura", game.tura.toString())
+                    .putBoolean("IsAIEnabled", isAutoPlayEnabled)
+                    .apply();
+            for (int i = 0; i < arrayOfPoints.size(); i++) {
+                Point tmp = arrayOfPoints.get(i);
+                prefs.edit()
+                        .putString("point" + String.valueOf(i), tmp.type.toString())
+                        .apply();
+            }
+        } catch (Exception e) {
+
+        }
+
     }
 
     public void initializeStringConsts() {
@@ -135,6 +194,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clearAllPoints() {
+        if (arrayOfPoints == null) {
+            return;
+        }
         for (int i = 0; i < arrayOfPoints.size(); i++) {
             arrayOfPoints.get(i).image.setImageDrawable(null);
         }
