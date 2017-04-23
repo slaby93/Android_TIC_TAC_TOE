@@ -9,4 +9,7 @@
     <string name="draw">Draw</string>
     <string name="circle">Circle</string>
     <string name="cross">Cross</string>
+    <string name="ai_player_toast">AI player is</string>
+    <string name="enabled1">enabled</string>
+    <string name="disabled1">disabled</string>
 </resources>

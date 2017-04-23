@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     String drawText;
     String circleText;
     String crossText;
+    String AIPlayerToastMessageText;
+    String enabledText;
+    String disabledText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
         drawText = getResources().getString(R.string.draw);
         circleText = getResources().getString(R.string.circle);
         crossText = getResources().getString(R.string.cross);
+        AIPlayerToastMessageText = getResources().getString(R.string.ai_player_toast);
+        enabledText = getResources().getString(R.string.enabled1);
+        disabledText = getResources().getString(R.string.disabled1);
+
     }
 
     public void initializeSounds() {
@@ -317,7 +326,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startNewGame() {
-        System.out.println("NEW GAME");
         game = new Game();
 
         shouldEnableSwitchSide(true);
@@ -333,6 +341,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void enableComputerAIMenuItem() {
         this.isAutoPlayEnabled = !this.isAutoPlayEnabled;
+        showToast(AIPlayerToastMessageText + " " + (this.isAutoPlayEnabled ? enabledText : disabledText));
         syncAIButton();
     }
 
@@ -342,6 +351,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             enableComputerAIMenuItem.setTitle(enableText + " AI");
         }
+    }
+
+    public void showToast(String text) {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast.makeText(context, text, duration).show();
     }
 
 }

@@ -10,4 +10,7 @@
     <string name="draw">Remis</string>
     <string name="circle">Kółko</string>
     <string name="cross">Krzyżyk</string>
+    <string name="ai_player_toast">Gracz AI jest</string>
+    <string name="enabled1">włączony</string>
+    <string name="disabled1">wyłączony</string>
 </resources>
