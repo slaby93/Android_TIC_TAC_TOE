@@ -108,7 +108,14 @@ public class MainActivity extends AppCompatActivity {
         this.isAutoPlayEnabled = isAIEnabled;
         game.tura = tura;
         this.setTura(tura);
-
+        game.checkGameState();
+        if (game.state == GameState.CIRCLE_WIN) {
+            setWinner(Type.CIRCLE);
+        } else if (game.state == GameState.CROSS_WIN) {
+            setWinner(Type.CROSS);
+        } else if (game.state == GameState.DRAW) {
+            setDraw();
+        }
     }
 
     @Override
