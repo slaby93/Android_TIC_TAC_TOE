@@ -155,6 +155,34 @@ public class Game {
         if (isSameType(startingPoint, right) && isSameType(startingPoint, rightMore)) {
             return true;
         }
+        if (isSameType(startingPoint, left) && isSameType(startingPoint, leftMore)) {
+            return true;
+        }
+        if (isSameType(startingPoint, bottom) && isSameType(startingPoint, bottomMore)) {
+            return true;
+        }
+        if (isSameType(startingPoint, top) && isSameType(startingPoint, topMore)) {
+            return true;
+        }
+
+        if (isSameType(startingPoint, right) && isSameType(startingPoint, left)) {
+            return true;
+        }
+        if (isSameType(startingPoint, top) && isSameType(startingPoint, bottom)) {
+            return true;
+        }
+        if (isSameType(startingPoint, skosLewoBottom) && isSameType(startingPoint, skosLewoBottomMore)) {
+            return true;
+        }
+        if (isSameType(startingPoint, skosLewoTop) && isSameType(startingPoint, skosLewoTopMore)) {
+            return true;
+        }
+        if (isSameType(startingPoint, skosPrawoTop) && isSameType(startingPoint, skosPrawoTopMore)) {
+            return true;
+        }
+        if (isSameType(startingPoint, skosPrawoBottom) && isSameType(startingPoint, skosPrawoBottomMore)) {
+            return true;
+        }
         return false;
 
     }
